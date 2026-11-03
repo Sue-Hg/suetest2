@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- 한국어 문서 선언 -->
+<html lang="ko">
+<head>
+  <!-- 문자 인코딩 설정 (UTF-8) -->
+  <meta charset="UTF-8">
+  <!-- 모바일 및 다양한 기기 환경을 위한 반응형 뷰포트 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 웹 애플리케이션 제목 -->
+  <title>실시간 대기오염 정보 조회</title>
+  <!-- Chart.js 데이터 시각화 라이브러리 CDN 로드 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- 외부 스타일시트 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 전체 콘텐츠 감싸는 메인 컨테이너 -->
+  <div class="app-container">
+
+    <!-- 상단 헤더 영역 -->
+    <header class="header">
+      <!-- 메인 타이틀 -->
+      <h1 class="header-title">실시간 대기오염 정보</h1>
+      <!-- 부제목 설명 -->
+      <p class="header-desc">에어코리아 오픈API 기반 시·도별 미세먼지 실시간 현황</p>
+    </header>
+
+    <!-- 사용자 입력 및 컨트롤 바 영역 -->
+    <section class="control-section">
+      <!-- 시도 선택 안내 라벨 -->
+      <label for="sidoSelect" class="control-label">지역 선택:</label>
+      <!-- 시도를 선택할 수 있는 드롭다운 메뉴 -->
+      <select id="sidoSelect" class="sido-dropdown">
+        <!-- 전국 옵션 -->
+        <option value="전국">전국</option>
+        <!-- 서울 옵션 (기본 선택) -->
+        <option value="서울" selected>서울</option>
+        <!-- 부산 옵션 -->
+        <option value="부산">부산</option>
+        <!-- 대구 옵션 -->
+        <option value="대구">대구</option>
+        <!-- 인천 옵션 -->
+        <option value="인천">인천</option>
+        <!-- 광주 옵션 -->
+        <option value="광주">광주</option>
+        <!-- 대전 옵션 -->
+        <option value="대전">대전</option>
+        <!-- 울산 옵션 -->
+        <option value="울산">울산</option>
+        <!-- 세종 옵션 -->
+        <option value="세종">세종</option>
+        <!-- 경기 옵션 -->
+        <option value="경기">경기</option>
+        <!-- 강원 옵션 -->
+        <option value="강원">강원</option>
+        <!-- 충북 옵션 -->
+        <option value="충북">충북</option>
+        <!-- 충남 옵션 -->
+        <option value="충남">충남</option>
+        <!-- 전북 옵션 -->
+        <option value="전북">전북</option>
+        <!-- 전남 옵션 -->
+        <option value="전남">전남</option>
+        <!-- 경북 옵션 -->
+        <option value="경북">경북</option>
+        <!-- 경남 옵션 -->
+        <option value="경남">경남</option>
+        <!-- 제주 옵션 -->
+        <option value="제주">제주</option>
+      </select>
+    </section>
+
+    <!-- 선택 지역 평균 미세먼지 대형 수치 표시 섹션 -->
+    <section class="average-section" id="averageCard">
+      <!-- 평균 타이틀 레이블 -->
+      <h2 class="average-title" id="averageRegionText">서울 지역 평균 미세먼지</h2>
+      <!-- 큰 숫자로 강조되는 평균 수치 표시 영역 -->
+      <div class="average-value-box">
+        <!-- 평균 수치 숫자 -->
+        <span class="average-number" id="averageValue">-</span>
+        <!-- 측정 단위 -->
+        <span class="average-unit" id="averageUnit">㎍/㎥</span>
+      </div>
+      <!-- 평균 대기 등급 및 유효 측정소 정보 요약 텍스트 -->
+      <p class="average-status" id="averageStatus">데이터를 불러오는 중입니다...</p>
+    </section>
+
+    <!-- 측정소별 미세먼지 수치 상위 10개 가로 막대그래프 섹션 -->
+    <section class="chart-section" id="chartSection">
+      <!-- 차트 헤더 타이틀 및 설명 -->
+      <div class="chart-header">
+        <h3 class="chart-title">미세먼지 수치 TOP 10 측정소</h3>
+        <span class="chart-desc">수치가 높은 상위 10개소 (등급별 색상 적용)</span>
+      </div>
+      <!-- Chart.js 캔버스를 반응형으로 감싸는 컨테이너 -->
+      <div class="chart-wrapper">
+        <!-- 가로 막대그래프가 그려지는 캔버스 요소 -->
+        <canvas id="dustChart"></canvas>
+      </div>
+    </section>
+
+    <!-- 측정소 카드 목록 컨테이너 -->
+    <main class="station-list-container">
+      <!-- 측정소 목록 소제목 -->
+      <div class="list-header">
+        <!-- 안내 제목 -->
+        <h3 class="list-title">측정소별 상세 정보</h3>
+        <!-- 조회된 총 측정소 개수 표시 -->
+        <span class="list-count" id="stationCount">총 0개 측정소</span>
+      </div>
+
+      <!-- 로딩 및 상태 메시지 표시 박스 -->
+      <div class="status-message" id="statusMessage" style="display: none;"></div>
+
+      <!-- 측정소 카드들이 동적으로 추가되는 그리드 래퍼 -->
+      <div class="cards-grid" id="cardsGrid">
+        <!-- 자바스크립트에 의해 카드 요소가 동적으로 생성되어 들어옵니다 -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- 비즈니스 로직을 담당하는 자바스크립트 파일 연결 -->
+  <script src="script.js"></script>
+</body>
+</html>

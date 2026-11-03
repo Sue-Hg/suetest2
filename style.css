@@ -1,0 +1,419 @@
+/* 기본 마진 및 패딩 초기화와 박스 사이징 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 전체 페이지의 기본 폰트 및 배경색 설정 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+  background-color: #f3f4f6;
+  color: #1f2937;
+  line-height: 1.5;
+  padding: 16px;
+}
+
+/* 화면 전체 중앙 정렬 및 최대 너비 제한 컨테이너 */
+.app-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 상단 헤더 스타일 */
+.header {
+  text-align: center;
+  padding: 16px 0 8px;
+}
+
+/* 메인 타이틀 글자 크기 및 색상 */
+.header-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+/* 서브 설명글 스타일 */
+.header-desc {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* 시도 선택 컨트롤 바 영역 */
+.control-section {
+  background-color: #ffffff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* 시도 선택 라벨 텍스트 스타일 */
+.control-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 시도 선택 드롭다운 스타일 */
+.sido-dropdown {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  background-color: #f9fafb;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 드롭다운 포커스 시 테두리 효과 */
+.sido-dropdown:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* 상단 평균 미세먼지 수치 표시 대시보드 카드 */
+.average-section {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+/* 평균 영역 지역 타이틀 */
+.average-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 8px;
+}
+
+/* 평균 수치 및 단위 감싸는 박스 */
+.average-value-box {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+/* 큰 글씨로 강조되는 평균 숫자 */
+.average-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+/* 평균 수치 단위 텍스트 */
+.average-unit {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* 평균 대기 상태 및 설명글 */
+.average-status {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin-top: 6px;
+}
+
+/* 차트 전체 섹션 컨테이너 */
+.chart-section {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 차트 상단 헤더 바 */
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+/* 차트 제목 폰트 스타일 */
+.chart-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* 차트 보조 설명 스타일 */
+.chart-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* 차트 캔버스를 반응형으로 유지하는 래퍼 (높이 보장) */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+}
+
+/* 측정소 목록 메인 영역 */
+.station-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 목록 헤더 바 (제목 및 개수) */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+/* 목록 소제목 스타일 */
+.list-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* 총 측정소 개수 배지 스타일 */
+.list-count {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4b5563;
+  background-color: #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* 로딩 및 알림 메시지 박스 스타일 */
+.status-message {
+  text-align: center;
+  padding: 40px 16px;
+  font-size: 1.05rem;
+  color: #4b5563;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 카드 목록을 반응형 그리드로 정렬 (기본 PC/태블릿 다열) */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* 개별 측정소 카드 기본 구조 */
+.station-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border-top: 6px solid #94a3b8;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 카드에 마우스 올렸을 때 살짝 뜨는 효과 */
+.station-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* 등급 1: 파랑 (좋음) 카드 스타일 */
+.station-card.grade-1 {
+  border-top-color: #2563eb;
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%);
+}
+
+/* 등급 2: 초록 (보통) 카드 스타일 */
+.station-card.grade-2 {
+  border-top-color: #16a34a;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 40%);
+}
+
+/* 등급 3: 주황 (나쁨) 카드 스타일 */
+.station-card.grade-3 {
+  border-top-color: #ea580c;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 40%);
+}
+
+/* 등급 4: 빨강 (매우나쁨) 카드 스타일 */
+.station-card.grade-4 {
+  border-top-color: #dc2626;
+  background: linear-gradient(180deg, #fef2f2 0%, #ffffff 40%);
+}
+
+/* 등급 정보 없음: 회색 카드 스타일 */
+.station-card.grade-empty {
+  border-top-color: #94a3b8;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%);
+}
+
+/* 카드 상단 헤더 (측정소명 및 등급 뱃지) */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 8px;
+}
+
+/* 측정소 이름 스타일 */
+.station-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 등급 라벨 뱃지 기본 공통 스타일 */
+.grade-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  color: #ffffff;
+}
+
+/* 뱃지 색상: 좋음(파랑) */
+.grade-badge.badge-1 {
+  background-color: #2563eb;
+}
+
+/* 뱃지 색상: 보통(초록) */
+.grade-badge.badge-2 {
+  background-color: #16a34a;
+}
+
+/* 뱃지 색상: 나쁨(주황) */
+.grade-badge.badge-3 {
+  background-color: #ea580c;
+}
+
+/* 뱃지 색상: 매우나쁨(빨강) */
+.grade-badge.badge-4 {
+  background-color: #dc2626;
+}
+
+/* 뱃지 색상: 미측정/빈값(회색) */
+.grade-badge.badge-empty {
+  background-color: #64748b;
+}
+
+/* 카드 내부 미세먼지 수치 목록 래퍼 */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 각 수치 행 (라벨과 값 좌우 정렬) */
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+/* 측정 항목 이름 라벨 */
+.value-label {
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* 측정 수치 텍스트 (숫자 또는 "측정 안 됨") */
+.value-data {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* 측정 안 됨 텍스트 전용 스타일 */
+.value-data.not-measured {
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+/* 카드 하단 측정 시각 영역 */
+.card-footer {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 측정 시각 텍스트 스타일 */
+.data-time {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* 휴대폰 화면(폭 600px 이하)을 위한 모바일 반응형 미디어 쿼리 */
+@media (max-width: 600px) {
+  /* 모바일 화면 내부 패딩 축소 */
+  body {
+    padding: 10px;
+  }
+
+  /* 메인 타이틀 크기 축소 */
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  /* 컨트롤 섹션을 세로 방향 배치로 최적화 */
+  .control-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* 모바일에서 드롭다운 너비 100% 확장 */
+  .sido-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 모바일 평균 대시보드 패딩 조정 */
+  .average-section {
+    padding: 18px 14px;
+  }
+
+  /* 모바일 평균 큰 숫자 크기 축소 */
+  .average-number {
+    font-size: 2.8rem;
+  }
+
+  /* 모바일 환경에서 차트 높이 조정 */
+  .chart-wrapper {
+    height: 320px;
+  }
+
+  /* 모바일 환경에서는 카드를 1열로 꽉 차게 정렬 */
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

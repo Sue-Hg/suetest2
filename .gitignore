@@ -1,0 +1,17 @@
+# 환경 변수 파일 (인증키 유출 방지 및 깃허브 업로드 차단)
+.env
+.env.local
+.env.*.local
+
+# Vercel 프로젝트 및 빌드 임시 파일
+.vercel
+
+# Node 의존성 패키지 폴더
+node_modules/
+
+# OS 자동 생성 파일 및 에디터 설정 파일
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
